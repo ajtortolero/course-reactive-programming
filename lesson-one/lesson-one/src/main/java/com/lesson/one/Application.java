@@ -23,6 +23,7 @@ public class Application {
 		);
 		System.out.println("Inventory: " + inventory);
 		System.out.println("Grouping Using Loops: " + groupByPrice(inventory));
+		System.out.println("Grouping Using Sets: " + groupByPriceSet(inventory));
 
 	}
 	// Group by Using Loops
@@ -35,6 +36,22 @@ public class Application {
 				result.put(item.getPrice(), values);
 			} else {
 				result.get(item.getPrice()).add(item);
+			}
+		}
+		return result;
+	}
+
+	// Group by Using Sets
+	private static Map<Double, Set<String>> groupByPriceSet(List<Item> inventory) {
+		Map<Double, Set<String>> result = new HashMap<>();
+		for (Item item : inventory) {
+			if(!result.containsKey(item.getPrice())) {
+				Set<String> values = new HashSet<>();
+				values.add(item.getName());
+
+				result.put(item.getPrice(), values);
+			} else {
+				result.get(item.getPrice()).add(item.getName());
 			}
 		}
 		return result;
