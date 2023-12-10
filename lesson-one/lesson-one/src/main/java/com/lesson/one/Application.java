@@ -2,7 +2,13 @@ package com.lesson.one;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.*;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -24,6 +30,7 @@ public class Application {
 		System.out.println("Inventory: " + inventory);
 		System.out.println("Grouping Using Loops: " + groupByPrice(inventory));
 		System.out.println("Grouping Using Sets: " + groupByPriceSet(inventory));
+		System.out.println("Grouping Using Sets: " + groupByPriceStream(inventory));
 
 	}
 	// Group by Using Loops
@@ -55,5 +62,11 @@ public class Application {
 			}
 		}
 		return result;
+	}
+	// Group by Using Stream
+	private static Map<Double, Set<String>> groupByPriceStream(List<Item> inventory) {
+		return inventory.stream()
+				.collect(Collectors.groupingBy(Item::getPrice,
+						Collectors.mapping(Item::getName, Collectors.toSet())));
 	}
 }
