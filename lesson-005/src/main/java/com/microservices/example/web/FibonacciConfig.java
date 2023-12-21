@@ -15,7 +15,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromPublis
 @Configuration
 class FibonacciConfig {
     @Bean
-    RouterFunction<ServerResponse> functionaEndpoint() {
+    RouterFunction<ServerResponse> functionalEndpoint() {
         HandlerFunction<ServerResponse> helloWorld = request -> {
             Optional<String> name = request.queryParam("name");
             Publisher data = Flux.just("Hello to ", name.orElse("the world."));
